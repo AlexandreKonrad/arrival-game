@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    /* Base Options: O básico para Node.js moderno */
+    "target": "ES2020",                       
+    "module": "commonjs",                     
+    "lib": ["ES2020"],                        
+    "outDir": "./dist",                       
+    "rootDir": "./src",                       
+    
+    /* Strict Type-Checking Options: A parte "Tech Lead Chato" */
+    "strict": true,                           /* Ativa todas as checagens estritas */
+    "noImplicitAny": true,                    /* Proíbe o tipo 'any' implícito (obriga a tipar) */
+    "strictNullChecks": true,                 /* null e undefined são tipos distintos */
+    "strictFunctionTypes": true,              
+    "strictBindCallApply": true,              
+    "strictPropertyInitialization": true,     
+    "noImplicitThis": true,                   
+    "alwaysStrict": true,                     
+
+    /* Additional Checks: Qualidade extra */
+    "noUnusedLocals": true,                   /* Erro se declarar variável e não usar */
+    "noUnusedParameters": true,               /* Erro se declarar parâmetro de função e não usar */
+    "noImplicitReturns": true,                /* Garante que todos os caminhos da função retornem algo */
+    "noFallthroughCasesInSwitch": true,       
+
+    /* Module Resolution Options */
+    "moduleResolution": "node",               
+    "baseUrl": ".",                           
+    "esModuleInterop": true,                  
+    "skipLibCheck": true,                     
+    "forceConsistentCasingInFileNames": true  
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.test.ts"]
+}
