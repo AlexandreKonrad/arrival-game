@@ -1,11 +1,12 @@
 import 'dotenv/config';
 import knex, { Knex } from 'knex';
+import knexStringcase from "knex-stringcase";
 
 if (!process.env.DATABASE_URL) {
   throw new Error('❌ DATABASE_URL environment variable is not set.');
 }
 
-export const config: Knex.Config = {
+const baseConfig: Knex.Config = {
   client: 'pg',
   connection: process.env.DATABASE_URL,
   useNullAsDefault: true,
@@ -18,5 +19,6 @@ export const config: Knex.Config = {
     extension: 'ts'
   }
 };
+const options = knexStringcase(baseConfig as any);
 
-export const db = knex(config);
+export const conn = knex(options);

@@ -11,12 +11,12 @@ const config: Knex.Config = {
     database: process.env.DB_NAME, 
   },
   migrations: {
-    directory: "./src/shared/infra/database/migrations",
+    directory: "./src/infra/database/migrations",
     extension: "ts"
   },
   
   seeds: {
-    directory: "./src/shared/infra/database/seeds"
+    directory: "./src/infra/database/seeds"
   }
 };
 

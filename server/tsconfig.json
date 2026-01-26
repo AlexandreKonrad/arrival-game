@@ -2,7 +2,7 @@
   "compilerOptions": {
     /* Base Options: O básico para Node.js moderno */
     "target": "ES2020",                       
-    "module": "commonjs",                     
+    "module": "NodeNext",                     
     "lib": ["ES2020"],                        
     "outDir": "./dist",                       
     "rootDir": "./src",                       
@@ -24,7 +24,7 @@
     "noFallthroughCasesInSwitch": true,       
 
     /* Module Resolution Options */
-    "moduleResolution": "node",               
+    "moduleResolution": "NodeNext",               
     "baseUrl": ".",                           
     "esModuleInterop": true,                  
     "skipLibCheck": true,                     

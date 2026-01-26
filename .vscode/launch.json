@@ -6,12 +6,15 @@
       "request": "launch",
       "name": "Debug Server (Arrival)",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/server/src/server.ts",
       "cwd": "${workspaceFolder}/server",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["tsx"],
-      "envFile": "${workspaceFolder}/server/.env",
-      "sourceMaps": true
+      "program": "${workspaceFolder}/server/src/server.ts",
+      "runtimeExecutable": "${workspaceFolder}/server/node_modules/.bin/tsx.cmd",
+      "args": [],
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }
