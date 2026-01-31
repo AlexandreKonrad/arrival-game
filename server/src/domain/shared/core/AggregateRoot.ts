@@ -1,4 +1,3 @@
-import { UniqueEntityID } from "./UniqueEntityID";
 import { Entity } from "./Entity";
 import { IDomainEvent } from "../events/IDomainEvent";
 

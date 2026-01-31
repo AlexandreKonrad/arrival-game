@@ -18,7 +18,7 @@ export class SquadMapper{
             name: raw.name,
             code: raw.code,
             ownerId: raw.fk_id_owner,
-            createdAt: new Date(raw.created_at)
+            createdAt: raw.created_at
         }, raw.id);
     }
 }

@@ -9,16 +9,39 @@ interface UserProps{
     email: Email;
     squadId: UniqueEntityID;
     role: UserRole;
+    createdAt: Date;
 }
 
 export class User extends Entity<UserProps>{
-    get name() { return this.props.name; }
-    get email() { return this.props.email; }
-    get squadId() { return this.props.squadId; }
-    get role() { return this.props.role; }   
+    get name(): Name { return this.props.name; }
+    get email(): Email { return this.props.email; }
+    get squadId(): UniqueEntityID { return this.props.squadId; }
+    get role(): UserRole { return this.props.role; }  
+    get createdAt(): Date { return this.props.createdAt }
 
-    public static create(props: UserProps, id?: UniqueEntityID): User
+    private constructor(props: UserProps, id?: UniqueEntityID){
+        super(props, id);
+    }
+
+    public static create(props: {name: Name, email: Email, squadId: UniqueEntityID, role: UserRole}, id?: UniqueEntityID): User
     {
-        return new User(props, id);
+        return new User({
+            name: props.name,
+            email: props.email,
+            squadId: props.squadId,
+            role: props.role,
+            createdAt: new Date()
+        }, id);
+    }
+
+    public static restore(props: { name: string, email: string, squadId: string, role: string, createdAt: string | Date }, id: string): User
+    {
+        return new User({
+            name: Name.create(props.name),
+            email: Email.create(props.email),
+            squadId: new UniqueEntityID(props.squadId),
+            role: props.role as UserRole,
+            createdAt: new Date(props.createdAt)
+        }, new UniqueEntityID(id))
     }
 }

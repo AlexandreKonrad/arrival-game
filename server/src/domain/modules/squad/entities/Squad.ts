@@ -37,13 +37,13 @@ export class Squad extends AggregateRoot<SquadProps>{
         return squad
     }
 
-    public static restore(props: { name: string; code: string; ownerId: string; createdAt: Date}, id: string): Squad
+    public static restore(props: { name: string; code: string; ownerId: string; createdAt: string}, id: string): Squad
     {
         return new Squad({
             name: Name.create(props.name),
             code: SquadCode.create(props.code),
             ownerId: new UniqueEntityID(props.ownerId),
-            createdAt: props.createdAt
+            createdAt: new Date(props.createdAt)
         }, new UniqueEntityID(id));
     }
 }

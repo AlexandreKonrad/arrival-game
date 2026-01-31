@@ -23,7 +23,7 @@ export async function up(knex: Knex): Promise<void> {
         table.timestamp("created_at").defaultTo(knex.fn.now());
         table.timestamp("updated_at").defaultTo(knex.fn.now());
 
-        table.unique(["email", "fk_id_squad"]);
+        table.unique(["email"]);
         table.index(["email"], "idx_user_email");
     });
 

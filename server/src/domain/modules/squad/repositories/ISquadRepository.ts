@@ -4,5 +4,4 @@ import { User } from "../../user/entities/User";
 export interface ISquadRepository {
     save(squad: Squad): Promise<void>;
     saveWithOwner(squad: Squad, owner: User): Promise<void>;
-    findUserByEmail(email: string): Promise<User | null>;
 }
