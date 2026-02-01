@@ -10,9 +10,9 @@
     "lint": "eslint src/**/*.ts",
     "format": "prettier --write \"src/**/*.ts\"",
     "knex": "node --import tsx/esm ./node_modules/knex/bin/cli.js",
-    "test": "tsx scripts/setup-test-db.ts && npm run test:migrate && vitest run",
-    "test:ui": "vitest --ui",
-    "test:migrate": "dotenv -e .env.test -- knex migrate:latest"
+    "test": "tsx scripts/setup-test-db.ts && npm run test:migrate && dotenv -e .env.test -- vitest run",
+    "test:migrate": "dotenv -e .env.test -- knex migrate:latest",
+    "test:ui": "vitest --ui"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@fastify/cors": "^8.4.1",
+    "@fastify/jwt": "^8.0.1",
     "dotenv": "^16.3.1",
     "fastify": "^4.24.3",
     "knex": "^3.1.0",

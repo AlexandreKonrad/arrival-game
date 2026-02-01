@@ -5,6 +5,15 @@ import { User } from "src/domain/modules/user/entities/User";
 import { SquadMapper } from "../../mappers/SquadMapper";
 
 export class KnexSquadRepository implements ISquadRepository{
+
+    async findByCode(code: string): Promise<Squad | null>
+    {
+        const rawSquad = await conn("squad").where({ code }).first();
+
+        if (!rawSquad) return null;
+        
+        return SquadMapper.toDomain(rawSquad);
+    }
     
     async save(squad: Squad): Promise<void>
     {

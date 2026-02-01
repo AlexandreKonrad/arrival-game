@@ -15,5 +15,12 @@ export namespace SquadErrors{
             this.name = "SquadErrors.InvalidCode";
         }
     }
+
+    export class SquadNotFoundError extends DomainError{
+        constructor(code: string) {
+            super(`Squad with code ${code} not found.`, 404);
+            this.name = "SquadErrors.SquadNotFoundError";
+        }
+    }
     
 }

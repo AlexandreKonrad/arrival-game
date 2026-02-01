@@ -9,7 +9,7 @@ export const createSquadSchema = z.object({
     userName: z
         .string({ required_error: "User name is required" })
         .min(4, { message: "User name must be at least 3 characters long" })
-        .max(255, { message: "User name must be at most 50 characters long" }),
+        .max(255, { message: "User name must be at most 255 characters long" }),
     
     userEmail: z
         .string({ required_error: "User email is required" })

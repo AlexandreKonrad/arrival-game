@@ -36,7 +36,8 @@ describe('Create Squad (E2E)', () => {
         expect(response.status).toBe(201);
         expect(response.body).toEqual(expect.objectContaining({
             squadId: expect.any(String),
-            userId: expect.any(String)
+            userId: expect.any(String),
+            token: expect.any(String)
         }));
     });
 

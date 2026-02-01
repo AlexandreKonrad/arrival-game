@@ -1,30 +1,30 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { CreateSquadHandler } from "src/domain/modules/squad/commands/CreateSquadHandler";
+import { joinSquadSchema } from "../../schemas/squad/joinSquadSchema";
 import { KnexSquadRepository } from "src/infra/database/persistence/knex/KnexSquadRepository";
 import { KnexUserRepository } from "src/infra/database/persistence/knex/KnexUserRepository";
-import { createSquadSchema } from "../../schemas/squad/createSquadSchema";
+import { JoinSquadHandler } from "src/domain/modules/squad/commands/JoinSquadHandler";
 import { UserRole } from "src/domain/modules/user/enums/UserRole";
 
-export class CreateSquadController{
+export class JoinSquadController {
     
     public async handle(request: FastifyRequest, reply: FastifyReply): Promise<void>
     {
-        const body = createSquadSchema.parse(request.body);
+        const body = joinSquadSchema.parse(request.body);
 
-        const squadRepository = new KnexSquadRepository();
-        const userRepository = new KnexUserRepository();
-        const handler = new CreateSquadHandler(squadRepository, userRepository);
+        const squadRepo = new KnexSquadRepository();
+        const userRepo = new KnexUserRepository();
+        const handler = new JoinSquadHandler(squadRepo, userRepo);
 
         const result = await handler.execute({
-            squadName: body.squadName,
             userName: body.userName,
-            email: body.userEmail
+            userEmail: body.userEmail,
+            squadCode: body.squadCode
         });
 
         const token = await reply.jwtSign({
             sub: result.userId,
             squadId: result.squadId,
-            role: UserRole.OWNER
+            role: UserRole.MEMBER
         },{
             sign: { expiresIn: '30d' }
         });
@@ -34,5 +34,4 @@ export class CreateSquadController{
             token
         });
     }
-
 }

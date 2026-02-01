@@ -17,10 +17,9 @@ export namespace UserErrors{
     }
 
     export class EmailAlreadyExists extends DomainError {
-    constructor(email: string) {
-      super(`The email "${email}" is already associated with an account.`, 409);
-      this.name = "UserErrors.EmailAlreadyExists";
-    }
-  }
-    
+        constructor(email: string) {
+        super(`The email "${email}" is already associated with an account.`, 409);
+        this.name = "UserErrors.EmailAlreadyExists";
+        }
+    } 
 }
