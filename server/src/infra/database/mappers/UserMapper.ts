@@ -15,8 +15,6 @@ export class UserMapper{
 
     public static toDomain(raw: any): User
     {
-        console.log("🛠️ DEBUG RAW USER:", raw);
-
         return User.restore({
             name: raw.name,
             email: raw.email,

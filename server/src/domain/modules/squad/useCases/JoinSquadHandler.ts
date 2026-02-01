@@ -7,11 +7,11 @@ import { Email as UserEmail } from "src/domain/modules/user/vo/Email";
 import { User } from "src/domain/modules/user/entities/User";
 import { UserRole } from "src/domain/modules/user/enums/UserRole";
 
-export interface JoinSquadCommand {
+export interface JoinSquadCommand{
     userName: string;
     userEmail: string;
     squadCode: string;
-}
+};
 
 type JoinSquadResponse = {
     userId: string;

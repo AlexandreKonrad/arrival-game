@@ -2,8 +2,9 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { joinSquadSchema } from "../../schemas/squad/joinSquadSchema";
 import { KnexSquadRepository } from "src/infra/database/persistence/knex/KnexSquadRepository";
 import { KnexUserRepository } from "src/infra/database/persistence/knex/KnexUserRepository";
-import { JoinSquadHandler } from "src/domain/modules/squad/commands/JoinSquadHandler";
+import { JoinSquadHandler } from "src/domain/modules/squad/useCases/JoinSquadHandler";
 import { UserRole } from "src/domain/modules/user/enums/UserRole";
+import { TokenExpires } from "src/domain/modules/auth/enums/TokenExpires";
 
 export class JoinSquadController {
     
@@ -26,7 +27,7 @@ export class JoinSquadController {
             squadId: result.squadId,
             role: UserRole.MEMBER
         },{
-            sign: { expiresIn: '30d' }
+            sign: { expiresIn: TokenExpires.DAY_30 }
         });
 
         return reply.status(201).send({

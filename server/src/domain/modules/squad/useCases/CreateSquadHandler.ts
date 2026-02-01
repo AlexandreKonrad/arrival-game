@@ -4,11 +4,16 @@ import { User } from "../../user/entities/User";
 import { UserRole } from "../../user/enums/UserRole";
 import { ISquadRepository } from "../repositories/ISquadRepository";
 import { IUserRepository } from "../../user/repositories/IUserRepository";
-import { CreateSquadCommand } from "./CreateSquadCommand";
 import { Email } from "../../user/vo/Email";
 import { Name as SquadName } from "../vo/Name";
 import { Name as UserName } from "../../user/vo/Name";
 import { UserErrors } from "../../user/errors/UserErrors";
+
+export interface CreateSquadCommand{
+    squadName: string;
+    userName: string;
+    email: string
+};
 
 type CreateSquadResponse = {
     squadId: string;

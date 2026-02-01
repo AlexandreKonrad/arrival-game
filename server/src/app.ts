@@ -3,25 +3,27 @@ import cors from '@fastify/cors';
 import  jwt from "@fastify/jwt";
 import { ZodError } from "zod";
 import { DomainError } from "./domain/shared/errors/DomainError";
+import { authRoutes } from "./infra/http/routes/auth.routes";
 import { squadRoutes } from "./infra/http/routes/squad.routes";
 import { userRoutes } from "./infra/http/routes/user.routes";
 
 export const app = fastify({
   logger: true
 });
-
 app.register(jwt, {
   secret: process.env.JWT_SECRET || 'gLOrbfHdF5k2zR/Gme47jlfg9Tvk+nRlAIUr0Z8BR6E='
 });
-
 app.register(cors, { origin: '*' });
 
-app.register(squadRoutes, { prefix: '/squad' });
-app.register(userRoutes, { prefix: '/user' });
-
+/* Rotas */
 app.get('/ping', async () => {
   return { status: 'ok', message: 'Arrival Backend is running! 🚀' };
 });
+app.register(authRoutes, { prefix: '/auth' });
+app.register(squadRoutes, { prefix: '/squad' });
+app.register(userRoutes, { prefix: '/user' });
+
+/* HANDLE ERRORS */
 app.setErrorHandler((error, request, reply) => {
   if (error instanceof ZodError) {
     const formattedErrors = error.errors.map(issue => {
