@@ -15,12 +15,14 @@ export class UserMapper{
 
     public static toDomain(raw: any): User
     {
+        console.log("🛠️ DEBUG RAW USER:", raw);
+
         return User.restore({
             name: raw.name,
             email: raw.email,
             role: raw.role,
-            squadId: raw.fk_id_squad,
-            createdAt: raw.created_at
+            squadId: raw.fkIdSquad,
+            createdAt: raw.createdAt
         }, raw.id);
     }
 }

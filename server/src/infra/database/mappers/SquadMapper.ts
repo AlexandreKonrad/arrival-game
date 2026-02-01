@@ -17,8 +17,8 @@ export class SquadMapper{
         return Squad.restore({
             name: raw.name,
             code: raw.code,
-            ownerId: raw.fk_id_owner,
-            createdAt: raw.created_at
+            ownerId: raw.fkIdOwner,
+            createdAt: raw.createdAt
         }, raw.id);
     }
 }

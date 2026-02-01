@@ -35,6 +35,8 @@ export class KnexUserRepository implements IUserRepository{
     {
         const rawUser = await conn(
             "user"
+        ).select(
+            "*"
         ).where(
             "email", email
         ).first();
