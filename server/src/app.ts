@@ -1,11 +1,13 @@
 import fastify from "fastify";
 import cors from '@fastify/cors';
 import  jwt from "@fastify/jwt";
+
+import { authRoutes } from "./modules/auth/infra/routes/auth.routes";
+import { squadRoutes } from "./modules/squad/infra/routes/squad.routes";
+import { userRoutes } from "./modules/user/infra/routes/user.routes";
+
 import { ZodError } from "zod";
-import { DomainError } from "./domain/shared/errors/DomainError";
-import { authRoutes } from "./infra/http/routes/auth.routes";
-import { squadRoutes } from "./infra/http/routes/squad.routes";
-import { userRoutes } from "./infra/http/routes/user.routes";
+import { DomainError } from "./shared/errors/DomainError";
 
 export const app = fastify({
   logger: true

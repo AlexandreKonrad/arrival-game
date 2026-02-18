@@ -1,5 +1,5 @@
 import { app } from "./app";
-import { conn } from "./infra/database/conn";
+import { conn } from "./shared/infra/database/conn";
 
 const start = async() => {
   try{
