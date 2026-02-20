@@ -22,7 +22,7 @@ const baseConfig = {
     min: 2,
     max: 10
   },
-  // Opcional: Se quiser debugar queries lentas no futuro
+  // queries lentas
   // debug: process.env.NODE_ENV === 'development',
 };
 

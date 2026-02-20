@@ -21,7 +21,16 @@ export namespace UserErrors{
     export class EmailAlreadyExists extends DomainError
     {
         constructor(){
-            super(`User email already exists.`, 409)
+            super(`User email already exists.`, 409);
+            this.name = "UserErrors.EmailAlreadyExists";
+        }
+    }
+
+    export class NotFound extends DomainError
+    {
+        constructor(){
+            super(`User not found.`, 404);
+            this.name = "UserErrors.UserNotFoundError";
         }
     }
 }

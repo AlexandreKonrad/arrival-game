@@ -1,11 +1,11 @@
 import { FastifyInstance } from "fastify";
 import { authenticate } from "src/shared/infra/http/middlewares/authenticate";
+import { makeUserController } from "../factories/makeUserController";
 
 export async function userRoutes(app: FastifyInstance){
+    const UserController = makeUserController();
+
    app.get('/me', { onRequest: [authenticate] }, async (request, reply) => {
-        return reply.send({
-            message: "Você está autenticado!",
-            user: request.user
-        });
+        UserController.getProfile(request, reply)
     });
 }

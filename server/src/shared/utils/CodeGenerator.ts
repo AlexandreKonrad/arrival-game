@@ -1,6 +1,6 @@
 import { customAlphabet } from 'nanoid';
 
-const alphabet = '23456789ABCDEFGHJKMNPQRSTUVWXYZ';
+const alphabet = '0123456789ABCDEFGHJKMNPQRSTUVWXYZ';
 const generate = customAlphabet(alphabet, 6);
 
 export class CodeGenerator {
