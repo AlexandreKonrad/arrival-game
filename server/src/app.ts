@@ -13,6 +13,7 @@ import { ZodError } from "zod";
 import { DomainError } from "./shared/errors/DomainError";
 
 export const app = fastify({
+  connectionTimeout: 10000,
   logger: true
 });
 
@@ -28,11 +29,6 @@ app.register(rateLimit, {
 });
 
 app.decorate('authenticate', authenticate);
-
-app.addHook('onRequest', (req, reply, done) => {
-    reply.raw.setTimeout(10000);
-    done();
-});
 
 app.register(cors, { origin: process.env.FRONTEND_URL || 'http://localhost:3333' });
 

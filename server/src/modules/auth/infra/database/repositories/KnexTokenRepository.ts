@@ -24,7 +24,7 @@ export class KnexTokenRepository implements ITokenRepository
         const result = await conn(
             "token"
         ).where(
-            "token", token
+            "token", token.toValue()
         ).first();
 
         if(!result) return null;
@@ -32,12 +32,12 @@ export class KnexTokenRepository implements ITokenRepository
         return TokenMapper.toDomain(result);
     }
 
-    async markAsUsed(tokenId: string): Promise<void>
+    async markAsUsed(token: TokenValue): Promise<void>
     {
         await conn(
             "token"
         ).where(
-            "id", tokenId
+            "id", token.toValue()
         ).update({
             is_used: true
         })

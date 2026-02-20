@@ -31,9 +31,9 @@ describe('E2E: Full Squad Onboarding', () => {
         });
 
         expect(createResponse.statusCode).toBe(201);
-        const { squadCode } = createResponse.json();
+        const { squad } = createResponse.json();
         
-        expect(squadCode).toBeDefined();
+        expect(squad.code).toBeDefined();
 
         const joinResponse = await app.inject({
             method: 'POST',
@@ -41,19 +41,18 @@ describe('E2E: Full Squad Onboarding', () => {
             payload: {
                 userEmail: "testedois@gmail.com",
                 userName: "Teste Dois",
-                squadCode: squadCode
+                squadCode: squad.code
             }
         });
 
         expect(joinResponse.statusCode).toBe(201);
-        
-        const memberData = joinResponse.json();
+        const { token, refreshToken, user } = joinResponse.json();
 
-        expect(memberData.user.name).toBe("Teste Dois");
-        expect(memberData.user.email).toBe("testedois@gmail.com");
-        expect(memberData.user.role).toBe(UserRole.MEMBER);
+        expect(user.name).toBe("Teste Dois");
+        expect(user.email).toBe("testedois@gmail.com");
+        expect(user.role).toBe(UserRole.MEMBER);
         
-        expect(memberData.token).toBeDefined();
-        expect(memberData.refreshToken).toBeDefined();
+        expect(token).toBeDefined();
+        expect(refreshToken).toBeDefined();
     });
 });

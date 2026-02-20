@@ -8,10 +8,10 @@ export class TokenMapper
     public static toPersistence(token: Token): any
     {
         return {
-            id: token.id.toString(),
+            id: token.id.toValue(),
             token: token.token.value,
             type: token.type,
-            fk_id_user: token.userId.toString(),
+            fk_id_user: token.userId.toValue(),
             is_used: token.isUsed,
             expires_at: token.expiresAt,
             created_at: token.createdAt
@@ -23,7 +23,7 @@ export class TokenMapper
         return Token.restore({
             token: TokenValue.create(raw.token),
             type: raw.type as TokenType,
-            userId: new UniqueEntityID(raw.userId),
+            userId: new UniqueEntityID(raw.fkIdUser),
             isUsed: Boolean(raw.isUsed),
             expiresAt: new Date(raw.expiresAt),
             createdAt: new Date(raw.createdAt)

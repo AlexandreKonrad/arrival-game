@@ -5,5 +5,5 @@ export interface ITokenRepository
 {
     save(token: Token): Promise<void>;
     findByToken(token: TokenValue): Promise<Token | null>;
-    markAsUsed(tokenId: string): Promise<void>;
+    markAsUsed(tokenId: TokenValue): Promise<void>;
 }

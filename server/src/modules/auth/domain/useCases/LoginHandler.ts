@@ -4,7 +4,6 @@ import { ITokenRepository } from "../repositories/ITokenRepository";
 import { TokenProvider } from "../services/TokenProvider";
 import { TokenValue } from "../vo/TokenValue";
 import { AuthErrors } from "../errors/AuthErrors";
-import { TokenType } from "../enums/TokenType";
 
 type LoginInput = {
     tokenStr: string;
@@ -26,12 +25,12 @@ export class LoginHandler{
     {
         const tokenVO = TokenValue.create(tokenStr);
         const token = await this.tokenRepository.findByToken(tokenVO);
-        if(!token || !token.isValid() || token.type !== TokenType.MAGIC) throw new AuthErrors.InvalidToken();
+        if(!token || !token.isValid()) throw new AuthErrors.InvalidToken();
 
         const user = await this.userRepository.findById(token.userId);
         if(!user) throw new AuthErrors.UserNotFound();
 
-        await this.tokenRepository.markAsUsed(token.id.toString());
+        await this.tokenRepository.markAsUsed(tokenVO);
 
         const refreshTokenStr = await this.tokenProvider.generateRefreshToken(user.id);
 

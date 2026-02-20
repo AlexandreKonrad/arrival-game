@@ -13,7 +13,6 @@ import { Email } from "src/modules/user/domain/vo/Email";
 import { Name as UserName } from "src/modules/user/domain/vo/Name";
 
 import { UserErrors } from "../../../user/domain/errors/UserErrors";
-import { SquadCode } from "../vo/SquadCode";
 
 type CreateSquadInput = {
     squadName: string;
@@ -23,8 +22,8 @@ type CreateSquadInput = {
 
 type CreateSquadOutput = {
     user: User;
+    squad: Squad;
     refreshToken: string;
-    squadCode: SquadCode
 }
 
 export class CreateSquadHandler{
@@ -61,8 +60,8 @@ export class CreateSquadHandler{
 
         return {
             user: newUser,
+            squad: newSquad,
             refreshToken: refreshToken,
-            squadCode: newSquad.code
         };
     }
 }

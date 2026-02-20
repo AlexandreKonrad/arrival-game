@@ -8,11 +8,11 @@ export class UserMapper{
     public static toPersistence(user: User): any
     {
         return {
-            id: user.id.toString(),
+            id: user.id.toValue(),
             name: user.name.value,
             email: user.email.value,
             role: user.role,
-            fk_id_squad: user.squadId.toString(),
+            fk_id_squad: user.squadId.toValue(),
             created_at: user.createdAt
         };
     }

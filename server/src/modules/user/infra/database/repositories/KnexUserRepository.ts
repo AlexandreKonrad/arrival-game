@@ -27,7 +27,7 @@ export class KnexUserRepository implements IUserRepository{
         ).select(
             "id"
         ).where(
-            "email", email.value.toString()
+            "email", email.toValue()
         ).first();
 
         return !!result;
@@ -40,7 +40,7 @@ export class KnexUserRepository implements IUserRepository{
         ).select(
             "*"
         ).where(
-            "id", id.toString()
+            "id", id.toValue()
         ).first();
 
         if(!result) return null;
@@ -55,7 +55,7 @@ export class KnexUserRepository implements IUserRepository{
         ).select(
             "*"
         ).where(
-            "email", email.value.toString()
+            "email", email.toValue()
         ).first();
 
         if(!result) return null;

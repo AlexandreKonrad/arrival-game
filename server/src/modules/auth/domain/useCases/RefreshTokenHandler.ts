@@ -30,7 +30,7 @@ export class RefreshTokenHandler{
         const user = await this.userRepository.findById(token.userId);
         if (!user) throw new AuthErrors.UserNotFound();
 
-        await this.tokenRepository.markAsUsed(token.id.toString());
+        await this.tokenRepository.markAsUsed(tokenVO);
        
         const newRefreshTokenStr = await this.tokenProvider.generateRefreshToken(user.id);
 

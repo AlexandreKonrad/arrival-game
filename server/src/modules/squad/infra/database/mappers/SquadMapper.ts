@@ -8,10 +8,10 @@ export class SquadMapper
     public static toPersistence(squad: Squad): any
     {
         return {
-            id: squad.id.toString(),
-            name: squad.name.value,
-            code: squad.code.value,
-            fk_id_owner: squad.ownerId.toString(),
+            id: squad.id.toValue(),
+            name: squad.name.toValue(),
+            code: squad.code.toValue(),
+            fk_id_owner: squad.ownerId.toValue(),
             created_at: squad.createdAt
         };
     }

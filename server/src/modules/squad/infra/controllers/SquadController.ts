@@ -6,6 +6,10 @@ import { createSquadSchema, joinSquadSchema } from "../schemas/squadSchemas";
 
 import { TokenExpires } from "src/modules/auth/domain/enums/TokenExpires";
 
+import { safe } from "src/shared/utils/safe";
+import { UserViewModel } from "src/modules/user/infra/view-models/UserViewModel";
+import { SquadViewModel } from "../view-models/SquadViewModel";
+
 export class SquadController{
 
     constructor(
@@ -17,15 +21,18 @@ export class SquadController{
     {
         const body = createSquadSchema.parse(request.body);
 
-        const { user, refreshToken, squadCode } = await this.createSquadHandler.execute({
+        const [error, result] = await safe(this.createSquadHandler.execute({
             squadName: body.squadName,
             userName: body.userName,
             email: body.userEmail
-        });
+        }));
+
+        if(error) throw error;
+        const { user, squad, refreshToken } = result;
 
         const accessToken = await reply.jwtSign({
-            squadId: user.squadId.toString(),
-            sub: user.id.toString(),
+            squadId: user.squadId.toValue(),
+            sub: user.id.toValue(),
             role: user.role
         }, {
             sign: { expiresIn: TokenExpires.MIN_15 }
@@ -34,14 +41,8 @@ export class SquadController{
         return reply.status(201).send({
             token: accessToken,
             refreshToken: refreshToken,
-            squadCode: squadCode.value.toString(),
-            user: {
-                squadId: user.squadId.toString(),
-                id: user.id.toString(),
-                name: user.name.value,
-                email: user.email.value,
-                role: user.role
-            }
+            squad: SquadViewModel.toHTTP(squad),
+            user: UserViewModel.toHTTP(user)
         });
     }
 
@@ -49,11 +50,14 @@ export class SquadController{
     {
         const body = joinSquadSchema.parse(request.body);
 
-        const { user, refreshToken } = await this.joinSquadHandler.execute(body);
+       const [error, result] = await safe(this.joinSquadHandler.execute(body));
+
+        if (error) throw error;
+        const { user, refreshToken } = result;
 
         const accessToken = await reply.jwtSign({
-            squadId: user.squadId.toString(),
-            sub: user.id.toString(),
+            squadId: user.squadId.toValue(),
+            sub: user.id.toValue(),
             role: user.role
         }, {
             sign: { expiresIn: TokenExpires.MIN_15 }
@@ -62,13 +66,7 @@ export class SquadController{
         return reply.status(201).send({
             token: accessToken,
             refreshToken: refreshToken,
-            user: {
-                squadId: user.squadId.toString(),
-                id: user.id.toString(),
-                name: user.name.value,
-                email: user.email.value,
-                role: user.role
-            }
+            user: UserViewModel.toHTTP(user)
         });
     }
 
